@@ -51,6 +51,10 @@ app.use(morgan('combined', {
 }));
 
 // ─── Health Check ────────────────────────────────
+app.get('/', (req, res) => {
+  res.send('<h1>✨ AuraSync API is Live and Protecting your Flow!</h1>');
+});
+
 app.get('/health', (req, res) => {
   res.json({
     status: 'alive',

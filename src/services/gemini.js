@@ -71,7 +71,7 @@ Generate a single, deeply perceptive micro-nudge (under 40 words).
 Focus on the *psychology* of the ${anonymizedData.stressState} state.
 Return ONLY JSON: {"nudge": "your perceptive message", "interventionType": "breathing|visual_reset|reframe|grounding", "urgency": "low|medium|high"}`;
 
-  return await callGemini('gemini-3.1-flash-lite', prompt, fallback);
+  return await callGemini('gemini-1.5-flash', prompt, fallback);
 }
 
 async function generateVibeScan(anonymizedData) {
@@ -91,7 +91,7 @@ Signals:
 Provide a "Deep Reflection" that hits home.
 Return ONLY JSON: {"greeting": "your deep insight", "suggestedAction": "breathe|pause|celebrate|reflect"}`;
 
-  return await callGemini('gemini-3.1-flash-lite', prompt, fallback);
+  return await callGemini('gemini-1.5-flash', prompt, fallback);
 }
 
 async function generateWeeklyReport(weeklyData, triggers) {
@@ -108,7 +108,7 @@ Create an encouraging, insightful report (under 150 words) with:
 3. One actionable tip for next week
 Return ONLY JSON: {"headline": "...", "insight": "...", "tip": "...", "overallTrend": "improving|stable|needs_attention"}`;
 
-  return await callGemini('gemini-3.1-flash-lite', prompt, fallback);
+  return await callGemini('gemini-1.5-flash', prompt, fallback);
 }
 
 function getFallbackNudge(state) {

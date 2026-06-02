@@ -38,8 +38,11 @@ router.post('/process-vibe', optionalAuth, privacyFirst, async (req, res) => {
         stressState, typingCadence, scrollSpeed, appSwitchFreq,
         interventionType: nudge.interventionType,
       });
-      // Update resilience score based on state
-      const scoreDelta = { CALM: 2, DRIFTING: 0, STRESSED: -1, SPIRALING: -3 };
+      // Update resilience score based on state (reward +3 points permanently for active check-ins)
+      const isCheckIn = req.body.isCheckIn === true;
+      const scoreDelta = isCheckIn 
+        ? { CALM: 3, DRIFTING: 3, STRESSED: 3, SPIRALING: 3 } 
+        : { CALM: 2, DRIFTING: 0, STRESSED: -1, SPIRALING: -3 };
       await updateResilienceScore(req.userId, scoreDelta[stressState] || 0);
     }
 

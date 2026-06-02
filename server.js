@@ -13,6 +13,7 @@ const nudgeRouter = require('./src/routes/nudge');
 const authRouter = require('./src/routes/auth');
 const vibeRouter = require('./src/routes/vibe');
 const paymentRouter = require('./src/routes/payments');
+const webhookRouter = require('./src/routes/webhooks');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(privacyFirst);
 // Public routes
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/webhooks', webhookRouter);
 
 // Protected routes – require auth middleware
 app.use('/api/nudge', auth, nudgeRouter);

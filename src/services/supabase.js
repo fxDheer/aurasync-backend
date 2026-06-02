@@ -24,7 +24,13 @@ async function getOrCreateProfile(userId, metadata = {}) {
 async function updateResilienceScore(userId, scoreDelta) {
   const profile = await getOrCreateProfile(userId);
   const newScore = Math.max(0, Math.min(100, profile.resilience_score + scoreDelta));
-  const { data, error } = await supabase.from('profiles').update({ resilience_score: newScore }).eq('user_id', userId).select().single();
+  const newStreak = profile.current_streak + 1;
+  const newCheckIns = profile.total_check_ins + 1;
+  const { data, error } = await supabase.from('profiles').update({ 
+    resilience_score: newScore,
+    current_streak: newStreak,
+    total_check_ins: newCheckIns
+  }).eq('user_id', userId).select().single();
   if (error) throw error;
   return data;
 }
